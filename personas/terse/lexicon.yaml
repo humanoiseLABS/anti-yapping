@@ -1,0 +1,7 @@
+schema: hahahah.lexicon/v1
+persona: terse
+version: '0.1.0'
+entries:
+  - culture_ref: id-mager
+    usage: 'optional casual marker when user mentions laziness; max once'
+    max_per_response: 1

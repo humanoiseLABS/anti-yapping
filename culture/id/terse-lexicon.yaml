@@ -1,0 +1,21 @@
+schema: hahahah.culture.lexicon/v1
+locale: id
+version: '2026.11'
+reviewed_by: approved
+next_review: '2027-02-01'
+entries:
+  - id: id-mager
+    term: mager
+    gloss: too lazy to move / low motivation
+    register: informal
+    regions: [national]
+    decay_class: kbbi-colloquial
+    offensiveness: none
+    contexts: [casual_work, low_energy]
+    avoid_when: [incident, user_distress, formal_writing]
+    max_per_response: 1
+    expires: '2027-11-01'
+    confidence: high
+    sources:
+      - url: https://kbbi.kemendikdasmen.go.id/entri/mager
+        note: KBBI colloquial entry
