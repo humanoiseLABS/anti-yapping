@@ -5,7 +5,7 @@
 [![Base: HAHahah](https://img.shields.io/badge/Base-%2B62%20Mode-ff6b2c?style=flat-square)](https://github.com/humanoiseLABS/hahahah)
 [![Website](https://img.shields.io/badge/Website-hahahah--web-ffd23f?style=flat-square)](https://hahahah-web.vercel.app)
 
-> **Anti-Yapping** adalah layer efisiensi token ekstrem + **Ponytail Surgical Diffs** untuk AI coding agents (Claude Code, Google Antigravity, OpenCode, Cursor, Codex, Qoder, Copilot). Menghilangkan 100% basa-basi korporat dan mengubah gaya chat menjadi developer **+62 (`lu/gw`)** yang ringkas, telegrafis, dan to-the-point.
+> **Stop AI yapping.** Direct answers on line 1, surgical diffs only, no full-file dumps, and authentic +62 developer communication for coding agents (Claude Code, Google Antigravity, OpenCode, Cursor, Codex, Qoder, Copilot).
 
 ---
 

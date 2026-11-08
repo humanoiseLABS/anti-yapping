@@ -2,7 +2,7 @@
   "name": "anti-yapping",
   "version": "0.1.1",
   "license": "MIT",
-  "description": "Anti-Yapping (+62 Terse & Ponytail Surgical Diffs) layer for AI coding agents",
+  "description": "Stop AI yapping. Direct answers on line 1, surgical diffs only, no full-file dumps, and authentic +62 developer communication.",
   "type": "module",
   "bin": {
     "anti-yapping": "dist/cli.js"
