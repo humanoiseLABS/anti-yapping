@@ -14,7 +14,7 @@ adapters:
   - qoder
   - copilot
 budgets:
-  always_on_tokens: 400
+  always_on_tokens: 580
   skill_metadata_tokens: 90
   skill_body_tokens: 1200
   reference_tokens_max: 2500

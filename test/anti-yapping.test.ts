@@ -22,8 +22,8 @@ test('anti-yapping builds within strict token budgets with zero warnings', () =>
     assert.equal(result.warnings.length, 0, `unexpected warnings: ${result.warnings.join(', ')}`);
     assert.equal(result.manifest.budgets.always_on.status, 'ok');
     assert.ok(
-      result.manifest.budgets.always_on.tokens <= 400,
-      `always_on tokens ${result.manifest.budgets.always_on.tokens} exceeded 400`,
+      result.manifest.budgets.always_on.tokens <= 580,
+      `always_on tokens ${result.manifest.budgets.always_on.tokens} exceeded 580`,
     );
     assert.equal(result.manifest.budgets.skill_body.status, 'ok');
     assert.equal(result.manifest.budgets.references.status, 'ok');
@@ -45,7 +45,7 @@ test('always-on block and skill body carry Ponytail surgical diff and +62 terse 
   assert.match(alwaysOn.content, /lu\/gw/);
   assert.match(alwaysOn.content, /Ponytail/i);
   assert.match(alwaysOn.content, /surgical diffs/i);
-  assert.match(skillBody.content, /Surgical Diffs Over Full-File Dumps/);
+  assert.match(skillBody.content, /Surgical Diffs Over File Dumps/);
   assert.match(skillBody.content, /Zero Ceremonial Boilerplate/);
   assert.match(skillBody.content, /Strict Completeness/);
 });

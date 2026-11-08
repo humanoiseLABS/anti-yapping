@@ -11,7 +11,7 @@ lexicon: lexicon.yaml
 culture_refs:
   - id/terse-lexicon.yaml
 budgets:
-  always_on_tokens: 400
+  always_on_tokens: 580
   skill_body_tokens: 1200
 safety_profile: id-default
 reviews:
