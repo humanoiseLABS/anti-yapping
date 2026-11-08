@@ -1,29 +1,65 @@
 # Anti-Yapping (`anti-yapping`)
 
-**Anti-Yapping** adalah layer efisiensi token ekstrem + **Ponytail Surgical Diffs** untuk AI coding agent (Claude Code, Google Antigravity, OpenCode, Cursor, Codex, Qoder, Copilot) dengan gaya bahasa developer **+62 (`lu/gw`)** yang singkat, padat, dan langsung ke inti.
+[![npm version](https://img.shields.io/npm/v/anti-yapping.svg?color=cb3837&style=flat-square)](https://www.npmjs.com/package/anti-yapping)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Base: HAHahah](https://img.shields.io/badge/Base-%2B62%20Mode-ff6b2c?style=flat-square)](https://github.com/humanoiseLABS/hahahah)
+[![Website](https://img.shields.io/badge/Website-hahahah--web-ffd23f?style=flat-square)](https://hahahah-web.vercel.app)
 
-Dibangun dari mesin dasar [HAHahah (+62 Mode)](https://github.com/humanoiseLABS/hahahah), tapi dipangkas ekstrem (**68% lebih ringan**) tanpa beban tabel meme/basa-basi:
-- **`always_on` footprint**: **372 token** (vs 538 token di +62 Mode)
-- **`skill_body` footprint**: **666 token** (vs 1.921 token di +62 Mode — hemat 65%)
-- **`references` footprint**: **971 token** (vs 3.884 token di +62 Mode — hemat 75%)
-
----
-
-## Fitur Utama
-
-1. **Telegraphic +62 Chat (`lu/gw` Hemat Ekstrem)**:
-   - Jawaban/solusi langsung di baris pertama.
-   - Maksimal 1–2 kalimat penjelasan di chat. Tanpa sapaan (*"Halo!"*, *"Tentu!"*), tanpa ngulang pertanyaan, tanpa basa-basi penutup (*"Semoga membantu!"*).
-   - Menekan kebocoran `<thinking>` / monolog internal ke ruang chat.
-2. **Ponytail Code Discipline (Write Less Code)**:
-   - **Surgical Diffs Over File Dumps**: Kalau cuma ubah 3 baris di file 300 baris, agen dilarang nge-print ulang seluruh file. Cukup blok/fungsi yang diubah + lokasi `file:line`.
-   - **Zero Ceremonial Boilerplate**: Tulis solusi paling pendek & langsung jalan. Tanpa wrapper class, helper factory, atau komentar obvios yang nggak diminta.
-   - **Strict Completeness (Anti-Lazy)**: Haram pakai `// ... rest of code` di tengah blok pengganti yang bikin syntax patah. Setiap snippet wajib valid & runnable.
-   - **Zero Safety Compromise**: Tidak pernah menghapus `try/catch`, validasi input, atau security check demi alasan hemat baris.
+> **Anti-Yapping** adalah layer efisiensi token ekstrem + **Ponytail Surgical Diffs** untuk AI coding agents (Claude Code, Google Antigravity, OpenCode, Cursor, Codex, Qoder, Copilot). Menghilangkan 100% basa-basi korporat dan mengubah gaya chat menjadi developer **+62 (`lu/gw`)** yang ringkas, telegrafis, dan to-the-point.
 
 ---
 
-## Quick Install (via NPX)
+## ⚡ Kenapa Butuh Anti-Yapping?
+
+Kebanyakan coding agent saat ini punya 2 penyakit utama:
+1. **Yapping & Fluff Berlebih**: Suka menyapa bertele-tele (*"Halo! Tentu, mari kita selesaikan..."*), mengulang-ulang pertanyaan user, dan minta maaf berulang kali kayak bot customer service.
+2. **File Dump Raksasa**: Cuma ubah 2 baris logika, tapi nekat nge-print ulang 300 baris file utuh. Boros token output, lambat, dan capek di-scroll.
+
+**Anti-Yapping memangkas dua-duanya:**
+- **Chat Telegrafis**: Maksimal 1–2 kalimat pendek. Baris 1 wajib reaksi + akar masalah/solusi.
+- **Ponytail Surgical Diffs**: Agen HANYA boleh mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang keras nge-dump file yang tidak berubah.
+
+---
+
+## 💬 Live Showcase (Uji Nyata Lapangan)
+
+### 1. Anti-Bot & Tongkrongan +62 (Zero Pick-Me)
+```text
+User  : woy su
+Agent : Woy. Mau ngapain? Spill error/kodenya.
+
+User  : bayarin utang gw nih
+Agent : Enak aja kocak, lu kira gw pinjol 💀
+
+User  : jahat
+Agent : Jahat itu gratis, utang lu yang gak 💀
+
+User  : sekarang gw mau ngomong serius
+Agent : Nah gitu. Mau bahas apa? Spill.
+```
+
+### 2. Kodingan: Direct Root Cause & Surgical Fix
+```text
+User  : bro fungsi syncUsers ini kenapa console.log udah muncul padahal DB belum selesai save?
+Agent : forEach gak nunggu async callback — promise-nya dibuang, jadi console.log jalan duluan. 
+        Pakai for...of (sekuensial) atau Promise.all(map) (paralel).
+
+        Sekuensial (aman buat email):
+        async function syncUsers(users) {
+          for (const u of users) {
+            await db.user.upsert({ where: { id: u.id }, create: u, update: u });
+            await sendWelcomeEmail(u.email);
+          }
+          console.log("Semua user berhasil di-sync!");
+        }
+
+        Kalau mau paralel, Promise.all tapi email bisa kena rate-limit provider — 
+        lebih baik sekuensial atau batasi concurrency.
+```
+
+---
+
+## 🚀 Quick Install (via NPX)
 
 Jalankan di root folder project kodingan lu:
 
@@ -47,10 +83,10 @@ npx anti-yapping install --adapter qoder --target .
 npx anti-yapping install --adapter copilot --target .
 ```
 
-### Cek Kesehatan & Uninstall
+### Manajemen & Lifecycle
 
 ```bash
-# Cek status instalasi
+# Cek kesehatan instalasi
 npx anti-yapping doctor --target .
 
 # Update ke versi terbaru
@@ -62,14 +98,23 @@ npx anti-yapping uninstall --target .
 
 ---
 
-## Perbandingan: `+62 Mode` vs `Anti-Yapping`
+## 📊 Perbandingan Arsitektur
 
-| Aspek | +62 Mode (`hahahah-ai`) | Anti-Yapping (`anti-yapping`) |
-| :--- | :--- | :--- |
-| **Gaya Bahasa** | `lu/gw`, ekspresif, roasting, `WKWKWK`, meme-aware | `lu/gw` telegrafis (maks 1–2 kalimat, zero yapping) |
-| **Output Kode** | Lengkap & runnable | **Ponytail Surgical Diffs** (hanya blok berubah + runnable) |
-| **Always-On Token** | 538 token | **372 token (-31%)** |
-| **Total Paket Token** | 6.370 token | **2.044 token (-68%)** |
+| Aspek | Base Coding Agent | +62 Mode (`hahahah-ai`) | Anti-Yapping (`anti-yapping`) |
+| :--- | :--- | :--- | :--- |
+| **Gaya Bicara** | Korporat, formal, sopan | `lu/gw`, barbar, roasting, `WKWKWK` | **`lu/gw` telegrafis (maks 1–2 kalimat, zero yapping)** |
+| **Output Kode** | File dump panjang | Lengkap & runnable | **Ponytail Surgical Diffs (hanya diff/blok + anchor)** |
+| **Basa-Basi** | Tinggi | Rendah | **Nol Besar (Zero Fluff)** |
+| **Thinking Leak** | Sering bocor | Ditekan | **Dilarang keras bocor ke chat** |
+
+---
+
+## 🛡️ Core Safety & Integrity
+
+Meskipun ringkas dan savage, Anti-Yapping tetap memegang standar teknis ketat dari HAHahah Core:
+- **No Lazy Ellipses**: Haram menggunakan `// ... rest of code` di tengah blok pengganti yang bikin syntax rusak.
+- **Preserve All Defenses**: Tidak pernah menghapus `try/catch`, validasi input, atau security check demi alasan hemat baris.
+- **Truth Over Scope**: Tidak pernah mengarang fiksi atau mengklaim test lulus tanpa menjalankannya.
 
 ---
 
