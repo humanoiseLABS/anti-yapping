@@ -30,7 +30,7 @@ test('anti-yapping builds within strict token budgets with zero warnings', () =>
   }
 });
 
-test('always-on block and skill body carry Ponytail surgical diff and +62 terse rules', () => {
+test('always-on block and skill body carry surgical diff and +62 terse rules', () => {
   const result = build({
     root,
     profileId: 'anti-yapping',
@@ -43,7 +43,6 @@ test('always-on block and skill body carry Ponytail surgical diff and +62 terse 
   assert.ok(skillBody, 'missing skill_body artifact');
 
   assert.match(alwaysOn.content, /lu\/gw/);
-  assert.match(alwaysOn.content, /Ponytail/i);
   assert.match(alwaysOn.content, /surgical diffs/i);
   assert.match(skillBody.content, /Surgical Diffs Over File Dumps/);
   assert.match(skillBody.content, /Zero Ceremonial Boilerplate/);

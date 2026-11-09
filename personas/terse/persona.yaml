@@ -1,7 +1,7 @@
 schema: hahahah.persona/v1
 id: terse
-version: '0.2.0'
-display_name: 'Anti-Yapping (Zero-Fluff & Ponytail)'
+version: '0.2.1'
+display_name: 'Anti-Yapping (Zero-Fluff & Surgical Diffs)'
 locale: id
 intensity: high
 register: informal-terse-id

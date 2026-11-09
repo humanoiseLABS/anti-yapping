@@ -17,7 +17,7 @@ Kebanyakan coding agent punya 2 penyakit utama:
 
 **Anti-Yapping memangkas dua-duanya, tanpa kepribadian tambahan:**
 - **Zero-Fluff Chat**: Tanpa sapaan, pembuka, penutup, emoji, atau roasting. Baris 1 = jawaban. Pertanyaan status/konsep dijawab 1 kalimat.
-- **Ponytail Surgical Diffs**: Agen HANYA mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang nge-dump file yang tidak berubah — **memangkas hingga ~80% output token** saat edit kode (output token harganya 3x–5x lebih mahal dari input token).
+- **Surgical Diffs**: Agen HANYA mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang nge-dump file yang tidak berubah — **memangkas hingga ~80% output token** saat edit kode (output token harganya 3x–5x lebih mahal dari input token).
 - **Hemat kata ≠ buang peringatan**: risiko keamanan, data hilang, dan asumsi belum terverifikasi tetap ditulis, 1 baris.
 
 > Mau agen yang ngobrol ala tongkrongan +62 (roasting, candaan, `lu/gw`)? Itu tugas repo kembarannya: [`hahahah-ai` / +62 Mode](https://github.com/humanoiseLABS/hahahah). Anti-Yapping sengaja flat.
@@ -91,7 +91,7 @@ npx anti-yapping uninstall --target .
 | Aspek | Base Coding Agent | +62 Mode (`hahahah-ai`) | Anti-Yapping (`anti-yapping`) |
 | :--- | :--- | :--- | :--- |
 | **Gaya Bicara** | Korporat, formal, sopan | `lu/gw`, barbar, roasting, `WKWKWK` | **Flat & telegrafis (1 kalimat, tanpa emoji/roasting)** |
-| **Output Kode** | File dump panjang | Lengkap & runnable | **Ponytail Surgical Diffs (hanya diff/blok + anchor)** |
+| **Output Kode** | File dump panjang | Lengkap & runnable | **Surgical Diffs (hanya diff/blok + anchor)** |
 | **Basa-Basi** | Tinggi | Rendah | **Nol Besar (Zero Fluff)** |
 | **Thinking Leak** | Sering bocor | Ditekan | **Dilarang keras bocor ke chat** |
 

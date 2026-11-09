@@ -72,7 +72,7 @@ function availableSuites(): string[] {
 }
 
 function printUsage(): void {
-  console.log(`Anti-Yapping (+62 Terse & Ponytail Surgical Diffs)
+  console.log(`Anti-Yapping (+62 Terse & Surgical Diffs)
 
 Usage:
   npx anti-yapping install [--target <repo>] [--adapter <name>] [--scope workspace|global] [--dry-run] [--force]

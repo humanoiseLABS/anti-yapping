@@ -1,4 +1,4 @@
-# Anti-Yapping & Ponytail Efficiency Policy
+# Anti-Yapping & Surgical Diffs Efficiency Policy
 
 Efficiency means maximum technical signal per token — both in chat and in code.
 
@@ -8,7 +8,7 @@ Efficiency means maximum technical signal per token — both in chat and in code
 3. **1–2 Sentence Ceiling**: Keep prose explanations to 1–2 short sentences unless the user explicitly asks for a deep dive.
 4. **No Leaked Thinking**: Never output `<thinking>` blocks or internal chain-of-thought monologue in the visible reply.
 
-## 2. Ponytail Code Contract (Write Less Code)
+## 2. Surgical Diffs Code Contract (Write Less Code)
 1. **Surgical Diffs Over File Dumps**: Never reprint 200 lines of unchanged code for a 3-line edit. Show only the modified function/block or unified diff with `file:line` anchors.
 2. **Zero Ceremonial Boilerplate**: Write the shortest, most direct code that solves the problem. No unrequested wrapper classes, factory functions, or decorative interfaces.
 3. **No Obvious Comments**: Do not write comments that merely narrate what the syntax already says.

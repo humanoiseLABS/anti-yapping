@@ -1,8 +1,8 @@
 {
   "name": "anti-yapping",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
-  "description": "Stop AI yapping. Line 1 telegraphic answers, Ponytail surgical diffs only, zero fluff, and up to 80% output token savings for AI coding agents.",
+  "description": "Stop AI yapping. Line 1 telegraphic answers, surgical diffs only, zero fluff, and up to 80% output token savings for AI coding agents.",
   "type": "module",
   "bin": {
     "anti-yapping": "dist/cli.js"
@@ -28,7 +28,6 @@
   "keywords": [
     "coding-agent",
     "anti-yapping",
-    "ponytail",
     "token-efficiency",
     "claude-code",
     "antigravity",
