@@ -76,7 +76,8 @@ npx anti-yapping install --adapter opencode --target .
 # Cursor / Codex / Windsurf / AGENTS.md
 npx anti-yapping install --adapter agents-md --target .
 
-# Qoder CLI
+# Qoder (global untuk semua project & sesi lama/baru, atau per-project)
+npx anti-yapping install --adapter qoder --scope global
 npx anti-yapping install --adapter qoder --target .
 
 # GitHub Copilot
