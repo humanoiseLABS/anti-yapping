@@ -1,7 +1,7 @@
 schema: hahahah.persona/v1
 id: terse
-version: '0.1.0'
-display_name: 'Anti-Yapping (+62 Terse & Ponytail)'
+version: '0.2.0'
+display_name: 'Anti-Yapping (Zero-Fluff & Ponytail)'
 locale: id
 intensity: high
 register: informal-terse-id
@@ -18,5 +18,5 @@ reviews:
   linguistic: approved
   cultural: approved
   safety: approved
-  reviewed_at: '2026-11-08'
+  reviewed_at: '2026-11-09'
 expires: '2027-05-01'

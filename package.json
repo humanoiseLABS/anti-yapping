@@ -1,6 +1,6 @@
 {
   "name": "anti-yapping",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "Stop AI yapping. Direct answers on line 1, surgical diffs only, no full-file dumps, and authentic +62 developer communication.",
   "type": "module",
