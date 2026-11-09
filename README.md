@@ -17,7 +17,7 @@ Kebanyakan coding agent saat ini punya 2 penyakit utama:
 
 **Anti-Yapping memangkas dua-duanya:**
 - **Chat Telegrafis**: Maksimal 1–2 kalimat pendek. Baris 1 wajib reaksi + akar masalah/solusi.
-- **Ponytail Surgical Diffs**: Agen HANYA boleh mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang keras nge-dump file yang tidak berubah.
+- **Ponytail Surgical Diffs**: Agen HANYA boleh mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang keras nge-dump file yang tidak berubah — **memangkas hingga ~80% output token** saat edit kode (output token harganya 3x–5x lebih mahal dari input token).
 
 ---
 
