@@ -21,6 +21,42 @@ const BLOCK_PATH = 'CLAUDE.md';
 const BLOCK_BEGIN = /<!-- hahahah:begin [^\n]*-->/;
 const BLOCK_END = /<!-- hahahah:end -->/;
 
+export const RECOMMENDED_AGENT_IGNORE = `# anti-yapping: input token saver (safe build & asset ignores)
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+.gradle/
+*.apk
+*.aab
+*.idsig
+*.keystore
+*.jks
+coverage/
+*.log
+`;
+
+export function setupAgentIgnore(targetRoot: string, adapterId?: string): { created: boolean; path: string } {
+  const filenames = adapterId === 'claude-code' ? ['.claudeignore', '.agentignore'] : ['.agentignore'];
+  const primaryPath = join(targetRoot, filenames[0]);
+  let anyCreated = false;
+  for (const filename of filenames) {
+    const filePath = join(targetRoot, filename);
+    if (existsSync(filePath)) {
+      const existing = readFileSync(filePath, 'utf8');
+      if (!existing.includes('anti-yapping: input token saver')) {
+        writeFileSync(filePath, `${existing.trimEnd()}\n\n${RECOMMENDED_AGENT_IGNORE}`, 'utf8');
+        anyCreated = true;
+      }
+    } else {
+      writeFileSync(filePath, RECOMMENDED_AGENT_IGNORE, 'utf8');
+      anyCreated = true;
+    }
+  }
+  return { created: anyCreated, path: primaryPath };
+}
+
 export interface InstallOptions {
   sourceRoot: string;
   targetRoot: string;
@@ -230,6 +266,9 @@ export function install(options: InstallOptions): InstallResult {
     }
     writeAtomic(claudePath, merged.text);
     writeAtomic(join(targetRoot, MANIFEST_PATH), `${JSON.stringify(manifest, null, 2)}\n`);
+    if (options.scope !== 'global') {
+      setupAgentIgnore(targetRoot, adapterId);
+    }
     if (adapterId === 'qoder') {
       ensureQoderSessionResumeHook(targetRoot);
     }

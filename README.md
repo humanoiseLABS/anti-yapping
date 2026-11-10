@@ -17,7 +17,8 @@ Kebanyakan coding agent punya 2 penyakit utama:
 
 **Anti-Yapping memangkas dua-duanya, tanpa kepribadian tambahan:**
 - **Zero-Fluff Chat**: Tanpa sapaan, pembuka, penutup, emoji, atau roasting. Baris 1 = jawaban. Pertanyaan status/konsep dijawab 1 kalimat.
-- **Surgical Diffs**: Agen HANYA mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang nge-dump file yang tidak berubah — **memangkas hingga ~80% output token** saat edit kode (output token harganya 3x–5x lebih mahal dari input token).
+- **Surgical Diffs (Hemat Output Token ~80%)**: Agen HANYA mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang nge-dump file yang tidak berubah.
+- **Input Token Saver (Hemat Input Token ~50-70%)**: Mencegah agen nge-dump file besar (>200 baris) ke dalam context secara buta, melarang `cat package-lock.json`, dan otomatis memasang `.agentignore`/`.claudeignore` untuk memblokir folder `node_modules/`, `build/`, `dist/`, `.gradle/`, dan binary artifacts.
 - **Hemat kata ≠ buang peringatan**: risiko keamanan, data hilang, dan asumsi belum terverifikasi tetap ditulis, 1 baris.
 
 > Mau agen yang ngobrol ala tongkrongan +62 (roasting, candaan, `lu/gw`)? Itu tugas repo kembarannya: [`hahahah-ai` / +62 Mode](https://github.com/humanoiseLABS/hahahah). Anti-Yapping sengaja flat.
@@ -74,6 +75,9 @@ npx anti-yapping install --adapter copilot --target .
 ### Manajemen & Lifecycle
 
 ```bash
+# Pasang ignore rules hemat token (.agentignore / .claudeignore)
+npx anti-yapping ignore --target .
+
 # Cek kesehatan instalasi
 npx anti-yapping doctor --target .
 

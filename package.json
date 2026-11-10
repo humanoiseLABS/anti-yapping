@@ -1,8 +1,8 @@
 {
   "name": "anti-yapping",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
-  "description": "Stop AI yapping. Line 1 telegraphic answers, surgical diffs only, zero fluff, and up to 80% output token savings for AI coding agents.",
+  "description": "Stop AI yapping. Line 1 telegraphic answers, surgical diffs, input token saver, zero fluff, and extreme token savings for AI coding agents.",
   "type": "module",
   "bin": {
     "anti-yapping": "dist/cli.js"

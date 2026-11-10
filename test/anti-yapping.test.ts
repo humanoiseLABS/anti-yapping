@@ -6,7 +6,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from '../src/build.ts';
 import { HARNESS_SPECS } from '../src/harnesses.ts';
-import { doctor, install, uninstall, update } from '../src/install.ts';
+import { doctor, install, uninstall, update, setupAgentIgnore } from '../src/install.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -44,9 +44,12 @@ test('always-on block and skill body carry surgical diff and +62 terse rules', (
 
   assert.match(alwaysOn.content, /lu\/gw/);
   assert.match(alwaysOn.content, /surgical diffs/i);
+  assert.match(alwaysOn.content, /Hemat input token/i);
   assert.match(skillBody.content, /Surgical Diffs Over File Dumps/);
   assert.match(skillBody.content, /Zero Ceremonial Boilerplate/);
   assert.match(skillBody.content, /Strict Completeness/);
+  assert.match(skillBody.content, /Surgical Tool Discipline/i);
+  assert.match(skillBody.content, /Targeted Reading/i);
 });
 
 test('every harness adapter installs, passes doctor, updates, and uninstalls cleanly', () => {
@@ -79,5 +82,24 @@ test('every harness adapter installs, passes doctor, updates, and uninstalls cle
     } finally {
       rmSync(targetRoot, { recursive: true, force: true });
     }
+  }
+});
+
+test('setupAgentIgnore generates and appends input token saver ignore rules', () => {
+  const target = mkdtempSync(join(tmpdir(), 'anti-yapping-ignore-'));
+  try {
+    const res1 = setupAgentIgnore(target, 'claude-code');
+    assert.equal(res1.created, true);
+    assert.equal(existsSync(join(target, '.claudeignore')), true);
+    assert.equal(existsSync(join(target, '.agentignore')), true);
+    const content = readFileSync(join(target, '.claudeignore'), 'utf8');
+    assert.match(content, /node_modules\//);
+    assert.match(content, /\*\.keystore/);
+
+    // Idempotent rerun doesn't duplicate
+    const res2 = setupAgentIgnore(target, 'claude-code');
+    assert.equal(res2.created, false);
+  } finally {
+    rmSync(target, { recursive: true, force: true });
   }
 });

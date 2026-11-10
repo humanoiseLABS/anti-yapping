@@ -22,7 +22,7 @@ import {
   type EvalArm,
   type EvalTurnRecord,
 } from './eval.ts';
-import { doctor, install, uninstall, update, InstallError } from './install.ts';
+import { doctor, install, uninstall, update, setupAgentIgnore, InstallError } from './install.ts';
 import { checkRemoteUpdate, formatUpdateNotice } from './notifier.ts';
 import { runOpencode } from './opencode.ts';
 
@@ -76,6 +76,7 @@ function printUsage(): void {
 
 Usage:
   npx anti-yapping install [--target <repo>] [--adapter <name>] [--scope workspace|global] [--dry-run] [--force]
+  npx anti-yapping ignore [--target <repo>] [--adapter <name>]
   npx anti-yapping update [--target <repo>] [--dry-run] [--force]
   npx anti-yapping uninstall [--target <repo>] [--dry-run] [--force]
   npx anti-yapping doctor [--target <repo>]
@@ -270,6 +271,11 @@ if (isMainEntry()) {
       for (const warning of result.warnings) {
         console.log(`warning: ${warning}`);
       }
+    } else if (command === 'ignore') {
+      const adapterId = parsed.values.adapter ?? 'claude-code';
+      const result = setupAgentIgnore(parsed.values.target, adapterId);
+      console.log(`Input Token Saver: ${result.created ? 'Wrote' : 'Already configured'} ${result.path}`);
+      console.log('Protected context from: node_modules, build artifacts, keystores, binaries & logs.');
     } else if (command === 'update') {
       const result = update({
         sourceRoot: packageRoot,
