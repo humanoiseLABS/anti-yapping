@@ -18,6 +18,7 @@ Kebanyakan coding agent punya 2 penyakit utama:
 **Anti-Yapping memangkas dua-duanya, tanpa kepribadian tambahan:**
 - **Zero-Fluff Chat**: Tanpa sapaan, pembuka, penutup, emoji, atau roasting. Baris 1 = jawaban. Pertanyaan status/konsep dijawab 1 kalimat.
 - **Surgical Diffs (Hemat Output Token ~80%)**: Agen HANYA mengeluarkan blok fungsi atau diff yang berubah + anchor `file:line`. Dilarang nge-dump file yang tidak berubah.
+- **Obsidian-Style Code Graph (`.hahahah/graph/INDEX.md`)**: Otomatis membangun peta relasi kode (`[[wikilinks]]`, simbol `:line`, tabel/view SQL, & node `[[memory]]` lintas sesi) agar agen langsung tahu rute kode tanpa perlu baca puluhan file satu-satu.
 - **Input Token Saver (Hemat Input Token ~50-70%)**: Mencegah agen nge-dump file besar (>200 baris) ke dalam context secara buta, melarang `cat package-lock.json`, dan otomatis memasang `.agentignore`/`.claudeignore` untuk memblokir folder `node_modules/`, `build/`, `dist/`, `.gradle/`, dan binary artifacts.
 - **Hemat kata ≠ buang peringatan**: risiko keamanan, data hilang, dan asumsi belum terverifikasi tetap ditulis, 1 baris.
 
@@ -75,6 +76,9 @@ npx anti-yapping install --adapter copilot --target .
 ### Manajemen & Lifecycle
 
 ```bash
+# Bangun / refresh peta Obsidian Code Graph (.hahahah/graph/INDEX.md & memory.md)
+npx anti-yapping graph --target .
+
 # Pasang ignore rules hemat token (.agentignore / .claudeignore)
 npx anti-yapping ignore --target .
 

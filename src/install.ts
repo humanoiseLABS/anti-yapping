@@ -13,6 +13,7 @@ import {
 import { homedir, tmpdir } from 'node:os';
 import { dirname, join, resolve, sep } from 'node:path';
 import { build } from './build.ts';
+import { buildCodeGraph, removeCodeGraph } from './graph.ts';
 import { validate } from './schema.ts';
 import type { InstallManifest, MeasuredArtifact } from './types.ts';
 
@@ -268,6 +269,7 @@ export function install(options: InstallOptions): InstallResult {
     writeAtomic(join(targetRoot, MANIFEST_PATH), `${JSON.stringify(manifest, null, 2)}\n`);
     if (options.scope !== 'global') {
       setupAgentIgnore(targetRoot, adapterId);
+      buildCodeGraph(targetRoot);
     }
     if (adapterId === 'qoder') {
       ensureQoderSessionResumeHook(targetRoot);
@@ -444,6 +446,7 @@ export function uninstall(options: {
         writeAtomic(claudePath, cleaned);
       }
     }
+    removeCodeGraph(targetRoot);
     unlinkSync(join(targetRoot, MANIFEST_PATH));
     pruneEmptyDirs(dirname(join(targetRoot, MANIFEST_PATH)), targetRoot);
   }

@@ -16,7 +16,8 @@ Efficiency means maximum technical signal per token — both in chat and in code
 5. **Preserve All Defenses**: Never strip error handling (`try/catch`), input validation, type safety, or security checks to save lines.
 
 ## 3. Surgical Tool & Inspection Contract (Input Token Discipline)
-1. **Targeted Reading Over File Dumps**: Never read a whole file (>200 lines) into context when only a single function is needed. Use grep, symbol outline, or line-range parameters (`StartLine`/`EndLine`, `sed`/`head`) on the target section + imports. Files <150 lines may be read directly.
-2. **Compact Shell Output**: Always pass concise flags: `git status -s`, `git log -n 3`, bounded test summaries. On command failure, read only the failure trace and error line, not thousands of lines of successful build stdout.
-3. **Zero Giant Manifest Dumps**: Never dump massive lockfiles (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`) or bundle maps into context. Query packages via focused CLI tools (`npm list <pkg>`, `npm why <pkg>`).
-4. **Clean Session State Handoff**: When a diagnostic or multi-turn audit concludes, provide a 1–2 line state summary so the user can `/compact` or start a clean session without carrying 100k+ stale context tokens forward.
+1. **Graph-First Navigation**: If `.hahahah/graph/INDEX.md` exists, read it first (~300 tokens) to locate entrypoints, `[[wikilink]]` dependencies, and `:line` symbol anchors before running broad searches. Treat the graph as a routing index, not syntax ground truth—verify exact target lines before editing.
+2. **Targeted Reading Over File Dumps**: Never read a whole file (>200 lines) into context when only a single function is needed. Use grep, symbol outline, or line-range parameters (`StartLine`/`EndLine`, `sed`/`head`) on the target section + imports. Files <150 lines may be read directly.
+3. **Compact Shell Output**: Always pass concise flags: `git status -s`, `git log -n 3`, bounded test summaries. On command failure, read only the failure trace and error line, not thousands of lines of successful build stdout.
+4. **Zero Giant Manifest Dumps**: Never dump massive lockfiles (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`) or bundle maps into context. Query packages via focused CLI tools (`npm list <pkg>`, `npm why <pkg>`).
+5. **Clean Session State Handoff**: When a diagnostic or multi-turn audit concludes, update `.hahahah/graph/memory.md` (if present) and provide a 1–2 line state summary so the user can `/compact` or start a clean session without carrying 100k+ stale context tokens forward.

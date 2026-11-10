@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from '../src/build.ts';
+import { buildCodeGraph } from '../src/graph.ts';
 import { HARNESS_SPECS } from '../src/harnesses.ts';
 import { doctor, install, uninstall, update, setupAgentIgnore } from '../src/install.ts';
 
@@ -99,6 +100,47 @@ test('setupAgentIgnore generates and appends input token saver ignore rules', ()
     // Idempotent rerun doesn't duplicate
     const res2 = setupAgentIgnore(target, 'claude-code');
     assert.equal(res2.created, false);
+  } finally {
+    rmSync(target, { recursive: true, force: true });
+  }
+});
+
+test('buildCodeGraph generates Obsidian-style INDEX.md with wikilinks, symbols, and persistent memory.md', () => {
+  const target = mkdtempSync(join(tmpdir(), 'anti-yapping-graph-'));
+  try {
+    mkdirSync(join(target, 'src'), { recursive: true });
+    writeFileSync(
+      join(target, 'src', 'db.ts'),
+      'export async function findUser(id: string) {\n  return id;\n}\n',
+      'utf8',
+    );
+    writeFileSync(
+      join(target, 'src', 'auth.ts'),
+      "import { findUser } from './db.ts';\nexport function loginUser(id: string) {\n  return findUser(id);\n}\n",
+      'utf8',
+    );
+    writeFileSync(
+      join(target, 'schema.sql'),
+      'CREATE TABLE profiles (id text primary key);\nCREATE VIEW leaderboard AS SELECT id FROM profiles;\n',
+      'utf8',
+    );
+
+    const res = buildCodeGraph(target);
+    assert.equal(res.filesScanned, 3);
+    assert.equal(res.nodesEmitted, 3);
+    assert.equal(res.edgesCount, 1);
+
+    const indexMd = readFileSync(res.indexPath, 'utf8');
+    assert.match(indexMd, /\[\[src\/auth\.ts\]\]/);
+    assert.match(indexMd, /➔ \[\[src\/db\.ts\]\]/);
+    assert.match(indexMd, /`loginUser`:2/);
+    assert.match(indexMd, /table:`profiles`:1/);
+    assert.match(indexMd, /view:`leaderboard`:2/);
+
+    // Verify memory.md persists custom user/agent state across graph rebuilds
+    writeFileSync(res.memoryPath, '# Custom State\n- P0 patched\n', 'utf8');
+    buildCodeGraph(target);
+    assert.match(readFileSync(res.memoryPath, 'utf8'), /P0 patched/);
   } finally {
     rmSync(target, { recursive: true, force: true });
   }

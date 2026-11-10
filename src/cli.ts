@@ -22,6 +22,7 @@ import {
   type EvalArm,
   type EvalTurnRecord,
 } from './eval.ts';
+import { buildCodeGraph } from './graph.ts';
 import { doctor, install, uninstall, update, setupAgentIgnore, InstallError } from './install.ts';
 import { checkRemoteUpdate, formatUpdateNotice } from './notifier.ts';
 import { runOpencode } from './opencode.ts';
@@ -76,6 +77,7 @@ function printUsage(): void {
 
 Usage:
   npx anti-yapping install [--target <repo>] [--adapter <name>] [--scope workspace|global] [--dry-run] [--force]
+  npx anti-yapping graph [--target <repo>]
   npx anti-yapping ignore [--target <repo>] [--adapter <name>]
   npx anti-yapping update [--target <repo>] [--dry-run] [--force]
   npx anti-yapping uninstall [--target <repo>] [--dry-run] [--force]
@@ -271,6 +273,13 @@ if (isMainEntry()) {
       for (const warning of result.warnings) {
         console.log(`warning: ${warning}`);
       }
+    } else if (command === 'graph') {
+      const graphResult = buildCodeGraph(parsed.values.target);
+      console.log(
+        `Obsidian Code Graph: mapped ${graphResult.nodesEmitted}/${graphResult.filesScanned} file(s), ${graphResult.edgesCount} edge(s)`,
+      );
+      console.log(`index: ${graphResult.indexPath}`);
+      console.log(`memory: ${graphResult.memoryPath}`);
     } else if (command === 'ignore') {
       const adapterId = parsed.values.adapter ?? 'claude-code';
       const result = setupAgentIgnore(parsed.values.target, adapterId);
