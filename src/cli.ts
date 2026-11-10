@@ -23,7 +23,7 @@ import {
   type EvalArm,
   type EvalTurnRecord,
 } from './eval.ts';
-import { buildCodeGraph } from './graph.ts';
+import { buildCodeGraph, startLiveGraphServer } from './graph.ts';
 import { doctor, install, uninstall, update, setupAgentIgnore, InstallError } from './install.ts';
 import { checkRemoteUpdate, formatUpdateNotice } from './notifier.ts';
 import { runOpencode } from './opencode.ts';
@@ -78,7 +78,7 @@ function printUsage(): void {
 
 Usage:
   npx anti-yapping install [--target <repo>] [--adapter <name>] [--scope workspace|global] [--dry-run] [--force]
-  npx anti-yapping graph [--target <repo>] [--view]
+  npx anti-yapping graph [--target <repo>] [--view] [--live]
   npx anti-yapping ignore [--target <repo>] [--adapter <name>]
   npx anti-yapping update [--target <repo>] [--dry-run] [--force]
   npx anti-yapping uninstall [--target <repo>] [--dry-run] [--force]
@@ -283,7 +283,19 @@ if (isMainEntry()) {
       console.log(`index:  ${graphResult.indexPath}`);
       console.log(`memory: ${graphResult.memoryPath}`);
       console.log(`visual: ${graphResult.htmlPath}`);
-      if (parsed.values.view) {
+      if (parsed.values.live) {
+        const live = startLiveGraphServer(parsed.values.target, 4949);
+        console.log(`live:   ${live.url} (streaming real-time file & token telemetry via SSE)`);
+        if (parsed.values.view) {
+          if (process.platform === 'win32') {
+            spawn('cmd', ['/c', 'start', '', live.url], { detached: true, stdio: 'ignore' }).unref();
+          } else if (process.platform === 'darwin') {
+            spawn('open', [live.url], { detached: true, stdio: 'ignore' }).unref();
+          } else {
+            spawn('xdg-open', [live.url], { detached: true, stdio: 'ignore' }).unref();
+          }
+        }
+      } else if (parsed.values.view) {
         if (process.platform === 'win32') {
           spawn('cmd', ['/c', 'start', '', graphResult.htmlPath], { detached: true, stdio: 'ignore' }).unref();
         } else if (process.platform === 'darwin') {

@@ -1,6 +1,6 @@
 {
   "name": "anti-yapping",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "license": "MIT",
   "description": "Stop AI yapping. Line 1 telegraphic answers, surgical diffs, Obsidian-style codebase graph, input token saver, and extreme token savings for AI coding agents.",
   "type": "module",
