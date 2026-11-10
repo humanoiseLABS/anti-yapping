@@ -76,7 +76,10 @@ npx anti-yapping install --adapter copilot --target .
 ### Manajemen & Lifecycle
 
 ```bash
-# Bangun / refresh peta Obsidian Code Graph + buka Interactive Visual Graph di browser
+# 🔥 3D Second Brain Live Visualizer (Real-time SSE token telemetry di http://127.0.0.1:4949)
+npx anti-yapping graph --live
+
+# Bangun / refresh peta Obsidian Code Graph statis + buka di browser
 npx anti-yapping graph --target . --view
 
 # Pasang ignore rules hemat token (.agentignore / .claudeignore)
@@ -91,6 +94,26 @@ npx anti-yapping update --target .
 # Copot bersih tanpa sisa
 npx anti-yapping uninstall --target .
 ```
+
+---
+
+## 🧠 3D Neural Second Brain (`--live`)
+
+Visualizer 3D real-time berkecepatan 60 FPS murni HTML5 Canvas tanpa dependency berat:
+* **`memory.md` Nucleus:** Inti hijau emerald berdenyut di tengah bola ($r \approx 0.18$), menyimpan memori stateful permanen lintas sesi (~68 token).
+* **360° Global Cortex Lattice:** Ratusan benang halus keperakan (*trans-spherical chords*) yang menusuk silang-menyilang di dalam ruang 3D.
+* **Cognitive Wave Dynamics:** Ritme bernapas organik—tenang saat idle, dan **meledak mendadak (15–25 laser crimson)** saat token diproses atau file disentuh AI.
+* **Live SSE Telemetry:** Terkoneksi langsung ke file-watcher lokal untuk mengukur delta token (`Δ+18 tok`), throughput (`154 tok/s`), dan penelusuran AST symbol.
+* **Interactive Terminal Console:** Dilengkapi prompt pencarian AST simbol, memory inspection, dan stream pemikiran typewriter.
+
+---
+
+## ⚡ Smart Surgical Diffs & AST Precision Anchoring
+
+* **Line 1 Telegraphic Answers:** Langsung solusi di baris 1 tanpa salam, sapaan pembuka, atau basa-basi korporat.
+* **Precision AST Anchors:** Mengunci baris operasi menggunakan simbol (`Function:Line`) agar operasi hanya menyentuh bagian yang perlu diubah.
+* **Zero Full-File Dumps:** Dilarang me-reprint file utuh; hanya mengeluarkan diff bersih (+/- baris).
+* **Input Token Saver:** Otomatis memasang aturan `.agentignore` untuk memblokir lockfiles, sourcemaps, dan build artifacts agar tidak membengkakkan context window. Hemat **70–80% token** total.
 
 ---
 
