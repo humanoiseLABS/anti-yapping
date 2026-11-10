@@ -1,10 +1,12 @@
 {
-  "name": "anti-yapping",
-  "version": "0.2.18",
+  "name": "token-maxxing",
+  "version": "0.3.0",
   "license": "MIT",
-  "description": "Stop AI yapping. Line 1 telegraphic answers, surgical diffs, Obsidian-style codebase graph, input token saver, and extreme token savings for AI coding agents.",
+  "description": "Stop AI yapping, start token-maxxing. Line 1 telegraphic answers, surgical diffs, 3D neural telemetry HUD, and extreme token savings for AI coding agents.",
   "type": "module",
   "bin": {
+    "token-maxxing": "dist/cli.js",
+    "tmx": "dist/cli.js",
     "anti-yapping": "dist/cli.js"
   },
   "files": [
@@ -19,20 +21,24 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/humanoiseLABS/anti-yapping.git"
+    "url": "git+https://github.com/humanoiseLABS/token-maxxing.git"
   },
   "bugs": {
-    "url": "https://github.com/humanoiseLABS/anti-yapping/issues"
+    "url": "https://github.com/humanoiseLABS/token-maxxing/issues"
   },
-  "homepage": "https://github.com/humanoiseLABS/anti-yapping#readme",
+  "homepage": "https://github.com/humanoiseLABS/token-maxxing#readme",
   "keywords": [
-    "coding-agent",
+    "token-maxxing",
+    "tmx",
     "anti-yapping",
+    "second-brain",
+    "coding-agent",
     "token-efficiency",
     "claude-code",
     "antigravity",
     "opencode",
     "cursor",
+    "telemetry",
     "indonesia"
   ],
   "engines": {
@@ -43,8 +49,8 @@
     "prepublishOnly": "npm run bundle",
     "typecheck": "tsc --noEmit",
     "test": "node --test",
-    "build": "node src/cli.ts build --profile anti-yapping --adapter fake",
-    "measure": "node src/cli.ts measure --profile anti-yapping",
+    "build": "node src/cli.ts build --profile token-maxxing --adapter fake",
+    "measure": "node src/cli.ts measure --profile token-maxxing",
     "check": "npm run typecheck && npm test"
   },
   "dependencies": {

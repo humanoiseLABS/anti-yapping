@@ -11,8 +11,8 @@ import { doctor, install, uninstall, update, setupAgentIgnore } from '../src/ins
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-test('anti-yapping builds within strict token budgets with zero warnings', () => {
-  for (const profileId of ['anti-yapping', 'terse-id']) {
+test('token-maxxing builds within strict token budgets with zero warnings', () => {
+  for (const profileId of ['token-maxxing', 'anti-yapping', 'terse-id']) {
     const result = build({
       root,
       profileId,
@@ -34,7 +34,7 @@ test('anti-yapping builds within strict token budgets with zero warnings', () =>
 test('always-on block and skill body carry surgical diff and +62 terse rules', () => {
   const result = build({
     root,
-    profileId: 'anti-yapping',
+    profileId: 'token-maxxing',
     adapterId: 'claude-code',
     write: false,
   });
@@ -55,15 +55,15 @@ test('always-on block and skill body carry surgical diff and +62 terse rules', (
 
 test('every harness adapter installs, passes doctor, updates, and uninstalls cleanly', () => {
   for (const spec of HARNESS_SPECS) {
-    const targetRoot = mkdtempSync(join(tmpdir(), `anti-yapping-${spec.id}-`));
+    const targetRoot = mkdtempSync(join(tmpdir(), `token-maxxing-${spec.id}-`));
     try {
       const installed = install({
         sourceRoot: root,
         targetRoot,
-        profileId: 'anti-yapping',
+        profileId: 'token-maxxing',
         adapterId: spec.id,
       });
-      assert.equal(installed.manifest.profile, 'anti-yapping');
+      assert.equal(installed.manifest.profile, 'token-maxxing');
       assert.equal(doctor({ targetRoot }).ok, true, `${spec.id}: doctor failed after install`);
 
       update({ sourceRoot: root, targetRoot });
@@ -87,7 +87,7 @@ test('every harness adapter installs, passes doctor, updates, and uninstalls cle
 });
 
 test('setupAgentIgnore generates and appends input token saver ignore rules', () => {
-  const target = mkdtempSync(join(tmpdir(), 'anti-yapping-ignore-'));
+  const target = mkdtempSync(join(tmpdir(), 'token-maxxing-ignore-'));
   try {
     const res1 = setupAgentIgnore(target, 'claude-code');
     assert.equal(res1.created, true);
@@ -106,7 +106,7 @@ test('setupAgentIgnore generates and appends input token saver ignore rules', ()
 });
 
 test('buildCodeGraph generates Obsidian-style INDEX.md with wikilinks, symbols, and persistent memory.md', () => {
-  const target = mkdtempSync(join(tmpdir(), 'anti-yapping-graph-'));
+  const target = mkdtempSync(join(tmpdir(), 'token-maxxing-graph-'));
   try {
     mkdirSync(join(target, 'src'), { recursive: true });
     writeFileSync(
@@ -137,7 +137,7 @@ test('buildCodeGraph generates Obsidian-style INDEX.md with wikilinks, symbols, 
     assert.match(indexMd, /table:`profiles`:1/);
     assert.match(indexMd, /view:`leaderboard`:2/);
     assert.equal(existsSync(res.htmlPath), true);
-    assert.match(readFileSync(res.htmlPath, 'utf8'), /Anti-Yapping Knowledge Graph/);
+    assert.match(readFileSync(res.htmlPath, 'utf8'), /Token-Maxxing Knowledge Graph/);
 
     // Verify memory.md persists custom user/agent state across graph rebuilds
     writeFileSync(res.memoryPath, '# Custom State\n- P0 patched\n', 'utf8');
