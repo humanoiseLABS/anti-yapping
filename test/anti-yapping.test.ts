@@ -136,6 +136,8 @@ test('buildCodeGraph generates Obsidian-style INDEX.md with wikilinks, symbols, 
     assert.match(indexMd, /`loginUser`:2/);
     assert.match(indexMd, /table:`profiles`:1/);
     assert.match(indexMd, /view:`leaderboard`:2/);
+    assert.equal(existsSync(res.htmlPath), true);
+    assert.match(readFileSync(res.htmlPath, 'utf8'), /Anti-Yapping Knowledge Graph/);
 
     // Verify memory.md persists custom user/agent state across graph rebuilds
     writeFileSync(res.memoryPath, '# Custom State\n- P0 patched\n', 'utf8');

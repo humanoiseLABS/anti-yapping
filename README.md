@@ -76,8 +76,8 @@ npx anti-yapping install --adapter copilot --target .
 ### Manajemen & Lifecycle
 
 ```bash
-# Bangun / refresh peta Obsidian Code Graph (.hahahah/graph/INDEX.md & memory.md)
-npx anti-yapping graph --target .
+# Bangun / refresh peta Obsidian Code Graph + buka Interactive Visual Graph di browser
+npx anti-yapping graph --target . --view
 
 # Pasang ignore rules hemat token (.agentignore / .claudeignore)
 npx anti-yapping ignore --target .

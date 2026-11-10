@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { spawn } from 'node:child_process';
 import { readFileSync, readdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -77,7 +78,7 @@ function printUsage(): void {
 
 Usage:
   npx anti-yapping install [--target <repo>] [--adapter <name>] [--scope workspace|global] [--dry-run] [--force]
-  npx anti-yapping graph [--target <repo>]
+  npx anti-yapping graph [--target <repo>] [--view]
   npx anti-yapping ignore [--target <repo>] [--adapter <name>]
   npx anti-yapping update [--target <repo>] [--dry-run] [--force]
   npx anti-yapping uninstall [--target <repo>] [--dry-run] [--force]
@@ -219,6 +220,7 @@ if (isMainEntry()) {
         force: { type: 'boolean', default: false },
         strict: { type: 'boolean', default: false },
         live: { type: 'boolean', default: false },
+        view: { type: 'boolean', default: false },
         dir: { type: 'string' },
         help: { type: 'boolean', short: 'h', default: false },
       },
@@ -278,8 +280,18 @@ if (isMainEntry()) {
       console.log(
         `Obsidian Code Graph: mapped ${graphResult.nodesEmitted}/${graphResult.filesScanned} file(s), ${graphResult.edgesCount} edge(s)`,
       );
-      console.log(`index: ${graphResult.indexPath}`);
+      console.log(`index:  ${graphResult.indexPath}`);
       console.log(`memory: ${graphResult.memoryPath}`);
+      console.log(`visual: ${graphResult.htmlPath}`);
+      if (parsed.values.view) {
+        if (process.platform === 'win32') {
+          spawn('cmd', ['/c', 'start', '', graphResult.htmlPath], { detached: true, stdio: 'ignore' }).unref();
+        } else if (process.platform === 'darwin') {
+          spawn('open', [graphResult.htmlPath], { detached: true, stdio: 'ignore' }).unref();
+        } else {
+          spawn('xdg-open', [graphResult.htmlPath], { detached: true, stdio: 'ignore' }).unref();
+        }
+      }
     } else if (command === 'ignore') {
       const adapterId = parsed.values.adapter ?? 'claude-code';
       const result = setupAgentIgnore(parsed.values.target, adapterId);

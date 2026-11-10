@@ -1,6 +1,6 @@
 schema: hahahah.persona/v1
 id: terse
-version: '0.2.3'
+version: '0.2.4'
 display_name: 'Anti-Yapping (Zero-Fluff & Surgical Diffs)'
 locale: id
 intensity: high
