@@ -40,7 +40,7 @@ coverage/
 
 export function setupAgentIgnore(targetRoot: string, adapterId?: string): { created: boolean; path: string } {
   const filenames = adapterId === 'claude-code' ? ['.claudeignore', '.agentignore'] : ['.agentignore'];
-  const primaryPath = join(targetRoot, filenames[0]);
+  const primaryPath = join(targetRoot, filenames[0]!);
   let anyCreated = false;
   for (const filename of filenames) {
     const filePath = join(targetRoot, filename);

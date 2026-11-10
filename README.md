@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/token-maxxing.svg?color=cb3837&style=flat-square)](https://www.npmjs.com/package/token-maxxing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
-[![Companion: +62 Mode](https://img.shields.io/badge/Companion-%2B62%20Mode-ff6b2c?style=flat-square)](https://github.com/humanoiseLABS/hahahah)
+[![Companion: +62 Mode](https://img.shields.io/badge/Companion-%2B62%20Mode-ff6b2c?style=flat-square)](https://github.com/humanoiseLABS/plus62)
 [![Website: HUMANOISE](https://img.shields.io/badge/Website-HUMANOISE-ffd23f?style=flat-square)](https://hahahah-web.vercel.app)
 
 > **Stop yapping. Start token-maxxing.**  
@@ -97,7 +97,7 @@ Visualizer 3D real-time berkecepatan 60 FPS murni HTML5 Canvas tanpa dependency 
 
 ## 📊 Perbandingan Arsitektur
 
-| Aspek | Base Coding Agent | +62 Mode (`hahahah-ai`) | Token-Maxxing (`token-maxxing` / `tmx`) |
+| Aspek | Base Coding Agent | +62 Mode (`plus62`) | Token-Maxxing (`token-maxxing` / `tmx`) |
 | :--- | :--- | :--- | :--- |
 | **Fokus Utama** | Standard assistant | Personality & Roasting | **Context & Token Optimization (Zero Yap)** |
 | **Gaya Bicara** | Korporat, formal, sopan | `lu/gw`, barbar, roasting, `WKWKWK` | **Flat & telegrafis (1 kalimat, tanpa basa-basi)** |
