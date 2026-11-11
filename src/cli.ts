@@ -228,12 +228,17 @@ if (isMainEntry()) {
         live: { type: 'boolean', default: false },
         view: { type: 'boolean', default: false },
         dir: { type: 'string' },
+        version: { type: 'boolean', short: 'v', default: false },
         help: { type: 'boolean', short: 'h', default: false },
       },
     });
 
-    const command = parsed.positionals[0];
-    if (!command || parsed.values.help) {
+    if (parsed.values.version) {
+      console.log(version);
+      process.exitCode = 0;
+    } else {
+      const command = parsed.positionals[0];
+      if (!command || parsed.values.help) {
       printUsage();
       process.exitCode = (command || parsed.values.help) ? 0 : 1;
     } else if (command === 'build' || command === 'measure') {
@@ -617,7 +622,8 @@ if (isMainEntry()) {
       printUsage();
       process.exitCode = 1;
     }
-  } catch (error) {
+  }
+} catch (error) {
     if (error instanceof BuildError || error instanceof InstallError) {
       console.error(`Command failed: ${error.message}`);
     } else {
