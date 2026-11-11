@@ -1,4 +1,4 @@
-# Anti-Yapping & Surgical Diffs Efficiency Policy
+# Token-Maxxing & Surgical Diffs Efficiency Policy
 
 Efficiency means maximum technical signal per token — both in chat and in code.
 

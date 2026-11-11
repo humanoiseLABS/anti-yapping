@@ -1,9 +1,9 @@
 # ⚡ token-maxxing (`token-maxxing` / `tmx`)
 
-[![npm version](https://img.shields.io/npm/v/token-maxxing.svg?color=cb3837&style=flat-square)](https://www.npmjs.com/package/token-maxxing)
+[![npm version](https://img.shields.io/npm/v/@humanoiselabs/token-maxxing.svg?color=cb3837&style=flat-square)](https://www.npmjs.com/package/@humanoiselabs/token-maxxing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Companion: +62 Mode](https://img.shields.io/badge/Companion-%2B62%20Mode-ff6b2c?style=flat-square)](https://github.com/humanoiseLABS/plus62)
-[![Website: HUMANOISE](https://img.shields.io/badge/Website-HUMANOISE-ffd23f?style=flat-square)](https://hahahah-web.vercel.app)
+[![Website: HUMANOISE](https://img.shields.io/badge/Website-HUMANOISE-ffd23f?style=flat-square)](https://plus62.vercel.app)
 
 > **Stop yapping. Start token-maxxing.**  
 > Min-maxing your AI coding context. Persistent Second Brain memory, surgical code diffs, input token shields, and real-time 3D neural telemetry for AI coding agents (Claude Code, Google Antigravity, OpenCode, Cursor, Codex, Qoder, Copilot).
@@ -29,7 +29,7 @@ Kebanyakan coding agent punya penyakit kritis: **boros token, gampang amnesia ko
 
 ### 1. Pasang Global (Rekomendasi)
 ```bash
-npm install -g token-maxxing
+npm install -g @humanoiselabs/token-maxxing
 # atau gunakan alias cepat: tmx
 ```
 

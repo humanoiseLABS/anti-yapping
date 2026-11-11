@@ -1,4 +1,4 @@
-# Anti-Yapping core
+# Token-Maxxing core
 
 Host policy, permissions, and primary instructions win.
 

@@ -2,6 +2,9 @@
   "name": "@humanoiselabs/token-maxxing",
   "version": "0.3.0",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Stop AI yapping, start token-maxxing. Line 1 telegraphic answers, surgical diffs, 3D neural telemetry HUD, and extreme token savings for AI coding agents.",
   "type": "module",
   "bin": {

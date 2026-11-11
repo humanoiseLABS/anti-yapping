@@ -1958,6 +1958,7 @@ export function startLiveGraphServer(targetRoot: string, port = 4949): { url: st
       });
       res.write(`data: ${JSON.stringify({ type: 'connected', project: basename(rootDir) })}\n\n`);
       clients.add(res);
+      res.on('error', () => clients.delete(res));
       req.on('close', () => clients.delete(res));
       return;
     }
@@ -1973,8 +1974,9 @@ export function startLiveGraphServer(targetRoot: string, port = 4949): { url: st
 
   const lastEmitTime = new Map<string, number>();
 
+  let watcher: ReturnType<typeof watch> | null = null;
   try {
-    const watcher = watch(rootDir, { recursive: true }, (eventType, filename) => {
+    watcher = watch(rootDir, { recursive: true }, (eventType, filename) => {
       if (!filename) return;
       const rel = toPosix(String(filename));
       if (rel.endsWith('graph.html') || rel.endsWith('INDEX.md')) return;
@@ -2032,20 +2034,33 @@ export function startLiveGraphServer(targetRoot: string, port = 4949): { url: st
           ts: now,
         });
         for (const client of clients) {
-          client.write(`data: ${payload}\n\n`);
+          try {
+            if (!client.writableEnded && !client.destroyed) {
+              client.write(`data: ${payload}\n\n`);
+            }
+          } catch {
+            clients.delete(client);
+          }
         }
       } catch {
         // ignore transient file lock
       }
     });
-    server.on('close', () => watcher.close());
+    server.on('close', () => {
+      try {
+        watcher?.close();
+      } catch {}
+    });
   } catch {
     // recursive watch fallback
   }
 
   server.on('error', (err: any) => {
     if (err.code === 'EADDRINUSE') {
-      // Live daemon already running on port, safe to reuse
+      try {
+        watcher?.close();
+      } catch {}
+      console.warn(`[token-maxxing] Live daemon already active on port ${port}. Attaching client...`);
     } else {
       console.error(`Live server error: ${err.message}`);
     }
@@ -2059,7 +2074,23 @@ export function startLiveGraphServer(targetRoot: string, port = 4949): { url: st
   return {
     url: `http://127.0.0.1:${port}`,
     close: () => {
-      try { server.close(); } catch {}
+      for (const client of clients) {
+        try {
+          client.end();
+        } catch {}
+      }
+      clients.clear();
+      try {
+        watcher?.close();
+      } catch {}
+      if (typeof (server as any).closeAllConnections === 'function') {
+        try {
+          (server as any).closeAllConnections();
+        } catch {}
+      }
+      try {
+        server.close();
+      } catch {}
     },
   };
 }

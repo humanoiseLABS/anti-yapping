@@ -235,7 +235,7 @@ if (isMainEntry()) {
     const command = parsed.positionals[0];
     if (!command || parsed.values.help) {
       printUsage();
-      process.exitCode = command ? 0 : 1;
+      process.exitCode = (command || parsed.values.help) ? 0 : 1;
     } else if (command === 'build' || command === 'measure') {
       const result = build({
         root: packageRoot,

@@ -1,4 +1,4 @@
-# Anti-Yapping Decision Policy
+# Token-Maxxing Decision Policy
 
 Classify every user request before acting:
 

@@ -153,7 +153,8 @@ function parseBlock(text: string): ParsedBlock | null {
   }
   const endIndex = end.index + end[0].length;
   const content = text.slice(begin.index, endIndex);
-  return { start: begin.index, end: endIndex, content, hash: sha256(content.trimEnd()) };
+  const normalized = content.replace(/\r\n/g, '\n').trimEnd();
+  return { start: begin.index, end: endIndex, content, hash: sha256(normalized) };
 }
 
 function blockContent(artifact: MeasuredArtifact): string {
@@ -175,7 +176,7 @@ function installBlock(
   if (parsed) {
     if (!old && !force) {
       throw new InstallError(
-        'An existing HAHahah managed block has no install manifest; use --force to replace it',
+        'An existing Token-Maxxing managed block has no install manifest; use --force to replace it',
       );
     }
     if (old && old.block.sha256 !== parsed.hash && !force) {
@@ -410,7 +411,7 @@ export function uninstall(options: {
   const targetRoot = resolve(options.targetRoot);
   const old = readManifest(targetRoot);
   if (!old) {
-    throw new InstallError(`No HAHahah install manifest at ${targetRoot}`);
+    throw new InstallError(`No Token-Maxxing install manifest at ${targetRoot}`);
   }
 
   const claudePath = join(targetRoot, old.block.path);
@@ -425,7 +426,8 @@ export function uninstall(options: {
     if (!existsSync(target)) {
       continue;
     }
-    if (sha256(readFileSync(target, 'utf8')) !== file.sha256 && !options.force) {
+    const currentText = readFileSync(target, 'utf8').replace(/\r\n/g, '\n');
+    if (sha256(currentText) !== file.sha256 && !options.force) {
       throw new InstallError(`Managed file was modified: ${file.path}; use --force`);
     }
     if (!options.dryRun) {
@@ -469,7 +471,8 @@ export function doctor(options: { targetRoot: string }): DoctorReport {
       errors.push(`Missing managed file: ${file.path}`);
       continue;
     }
-    if (sha256(readFileSync(target, 'utf8')) !== file.sha256) {
+    const currentText = readFileSync(target, 'utf8').replace(/\r\n/g, '\n');
+    if (sha256(currentText) !== file.sha256) {
       errors.push(`Hash mismatch: ${file.path}`);
     }
   }
@@ -518,7 +521,7 @@ export function update(options: {
   const targetRoot = resolve(options.targetRoot);
   const old = readManifest(targetRoot);
   if (!old) {
-    throw new InstallError(`No HAHahah install manifest at ${targetRoot}; run install first`);
+    throw new InstallError(`No Token-Maxxing install manifest at ${targetRoot}; run install first`);
   }
   const isGlobal = old.files.some(
     (file) => file.path.startsWith('config/rules/') || file.path.startsWith('skills/'),
