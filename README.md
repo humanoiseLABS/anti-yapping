@@ -8,6 +8,20 @@
 > **Stop yapping. Start token-maxxing.**  
 > Min-maxing your AI coding context. Persistent Second Brain memory, surgical code diffs, input token shields, and real-time 3D neural telemetry for AI coding agents (Claude Code, Google Antigravity, OpenCode, Cursor, Codex, Qoder, Copilot).
 
+![Token-Maxxing 3D Neural Second Brain HUD (`tmx graph --live`)](docs/assets/hud-neural-sphere.png)
+*Live 3D Neural Sphere HUD (`tmx graph --live` di `127.0.0.1:4949`) — nukleus `memory.md` di pusat bola, koneksi AST `[[wikilinks]]`, dan stream telemetri token real-time.*
+
+---
+
+## Before vs After (`Token-Maxxing`)
+
+Prompt yang sama persis (`halo bro` → tambah validasi helper di `src/billing.ts`, tanpa hint "diff") di model yang sama (**Gemini 4 Hydrogen Medium** · Antigravity IDE):
+
+| ❌ Before (Vanilla AI) | ⚡ After (`tmx` / Token-Maxxing) |
+|---|---|
+| ![Before: Sapaan CS, pengantar panjang, 10 baris kode + saran meluber ke bawah](docs/assets/showcase-tmx-before.png) | ![After: Langsung minta konteks di Chat 1, anchor file:line + patch ringkas nol basa-basi](docs/assets/showcase-tmx-after.png) |
+| Menyapa balik ala CS, menambah kalimat pengantar & blok saran lanjutan sampai terpotong scroll (`↓`). | Chat 1 datar (*"Mana error/kodenya?"*); Chat 2 langsung `src/billing.ts:33-35` + patch ringkas tanpa pembuka atau penutup. |
+
 ---
 
 ## ⚡ 3 Pilar Utama Token-Maxxing
